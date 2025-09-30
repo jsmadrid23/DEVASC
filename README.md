@@ -6,7 +6,7 @@
 
 <br/>
 
-![UI Screenshot](./images/Screenshot%UI.png)
+![UI Screenshot](./images/ScreenshotUI.png)
 
 <br/>
 
