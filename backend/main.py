@@ -1,41 +1,32 @@
-from fastapi import FastAPI, HTTPException
-import requests
-from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"], 
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-BASE_URL = "https://ipwho.is"
-
-@app.get("/ipinfo/{ip}")
-def get_ip_info(ip: str):
-    url = f"{BASE_URL}/{ip}"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        raise HTTPException(status_code=500, detail="Failed to fetch data from ipwho.is")
-
-    data = response.json()
-
-    if not data.get("success"):
-        raise HTTPException(status_code=400, detail=f'IP address "{ip}" is invalid')
-
-    return {
-        "ip": data.get("ip"),
-        "version": data.get("type"),
-        "country": data.get("country"),
-        "country_code": data.get("country_code"),
-        "region": data.get("region"),
-        "city": data.get("city"),
-        "org": data.get("connection", {}).get("isp"),
-        "asn": data.get("connection", {}).get("asn"),
-        "latitude": data.get("latitude"),
-        "longitude": data.get("longitude"),
-    }
+{
+  "lookup": {
+    "domain": "openai.com",
+    "ip_address": "104.18.33.45"
+  },
+  "ip_info": {
+    "ip": "104.18.33.45",
+    "version": "IPv4",
+    "country": "United States",
+    "country_code": "US",
+    "region": "California",
+    "city": "San Francisco",
+    "org": "Cloudflare, Inc.",
+    "asn": "AS13335",
+    "latitude": 37.7758,
+    "longitude": -122.4128
+  },
+  "whois": {
+    "domain_name": "openai.com",
+    "registrar": "MarkMonitor Inc.",
+    "creation_date": "2015-04-16 00:00:00",
+    "expiration_date": "2030-04-16 00:00:00",
+    "updated_date": "2024-01-20 00:00:00",
+    "name_servers": ["ns1.cloudflare.com", "ns2.cloudflare.com"],
+    "status": "active",
+    "emails": "abusecomplaints@markmonitor.com"
+  },
+  "ping": {
+    "ip": "104.18.33.45",
+    "status": "Reachable"
+  }
+}

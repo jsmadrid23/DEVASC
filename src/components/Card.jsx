@@ -1,6 +1,8 @@
 import Map from "./Map";
 
 function Card({ title, ipInfo }) {
+  if (!ipInfo) return null; // safety check
+
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       
@@ -13,10 +15,10 @@ function Card({ title, ipInfo }) {
           <h3 className="text-lg font-semibold text-white">Location Map</h3>
         </div>
         <Map 
-          latitude={ipInfo.latitude} 
-          longitude={ipInfo.longitude} 
-          city={ipInfo.city} 
-          country={ipInfo.country} 
+          latitude={ipInfo.ip_info?.latitude} 
+          longitude={ipInfo.ip_info?.longitude} 
+          city={ipInfo.ip_info?.city} 
+          country={ipInfo.ip_info?.country} 
         />
       </div>
 
@@ -29,41 +31,71 @@ function Card({ title, ipInfo }) {
           <h3 className="text-lg font-semibold text-white">{title}</h3>
         </div>
         <div className="grid gap-3">
+
+          {/* Lookup Info */}
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
-            <span className="text-gray-300 font-medium">IP Address:</span>
-            <span className="text-purple-300 font-mono">{ipInfo.ip}</span>
+            <span className="text-gray-300 font-medium">Input Domain:</span>
+            <span className="text-purple-300 font-mono">{ipInfo.lookup?.domain || "N/A"}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
+            <span className="text-gray-300 font-medium">Resolved IP:</span>
+            <span className="text-purple-300 font-mono">{ipInfo.lookup?.ip_address}</span>
+          </div>
+
+          {/* IP Info */}
+          <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Version:</span>
-            <span className="text-indigo-300">IPv{ipInfo.version}</span>
+            <span className="text-indigo-300">{ipInfo.ip_info?.version}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Country:</span>
-            <span className="text-green-300">{ipInfo.country} ({ipInfo.country_code})</span>
+            <span className="text-green-300">{ipInfo.ip_info?.country} ({ipInfo.ip_info?.country_code})</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Region:</span>
-            <span className="text-blue-300">{ipInfo.region}</span>
+            <span className="text-blue-300">{ipInfo.ip_info?.region}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">City:</span>
-            <span className="text-cyan-300">{ipInfo.city}</span>
+            <span className="text-cyan-300">{ipInfo.ip_info?.city}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">ISP:</span>
-            <span className="text-yellow-300">{ipInfo.org}</span>
+            <span className="text-yellow-300">{ipInfo.ip_info?.org}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">ASN:</span>
-            <span className="text-pink-300">{ipInfo.asn}</span>
+            <span className="text-pink-300">{ipInfo.ip_info?.asn}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Coordinates:</span>
-            <span className="text-orange-300 font-mono">{ipInfo.latitude}, {ipInfo.longitude}</span>
+            <span className="text-orange-300 font-mono">
+              {ipInfo.ip_info?.latitude}, {ipInfo.ip_info?.longitude}
+            </span>
           </div>
+
+          {/* Ping */}
+          <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
+            <span className="text-gray-300 font-medium">Ping Status:</span>
+            <span className={`font-bold ${ipInfo.ping?.status === "Reachable" ? "text-green-400" : "text-red-400"}`}>
+              {ipInfo.ping?.status}
+            </span>
+          </div>
+
+          {/* WHOIS */}
+          <div className="p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
+            <span className="text-gray-300 font-medium">WHOIS:</span>
+            <div className="mt-2 text-sm text-gray-400 space-y-1">
+              <div><strong>Registrar:</strong> {ipInfo.whois?.registrar || "N/A"}</div>
+              <div><strong>Created:</strong> {ipInfo.whois?.creation_date || "N/A"}</div>
+              <div><strong>Expires:</strong> {ipInfo.whois?.expiration_date || "N/A"}</div>
+              <div><strong>Updated:</strong> {ipInfo.whois?.updated_date || "N/A"}</div>
+              <div><strong>Email:</strong> {ipInfo.whois?.emails || "N/A"}</div>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
   );
 }
