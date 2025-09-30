@@ -34,36 +34,18 @@ function Card({ title, ipInfo }) {
 
           {/* Lookup Info */}
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
-<<<<<<< HEAD
-<<<<<<< HEAD
             <span className="text-gray-300 font-medium">Input Domain:</span>
             <span className="text-purple-300 font-mono">{ipInfo.lookup?.domain || "N/A"}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Resolved IP:</span>
             <span className="text-purple-300 font-mono">{ipInfo.lookup?.ip_address}</span>
-=======
-            <span className="text-gray-300 font-medium">IP Address:</span>
-            <span className="text-purple-300 font-mono">{ipInfo.ip}</span>
->>>>>>> parent of fbd9ef0 (Update Card.jsx)
-=======
-            <span className="text-gray-300 font-medium">IP Address:</span>
-            <span className="text-purple-300 font-mono">{ipInfo.ip}</span>
->>>>>>> parent of fbd9ef0 (Update Card.jsx)
           </div>
 
           {/* IP Info */}
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Version:</span>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <span className="text-indigo-300">{ipInfo.ip_info?.version}</span>
-=======
-            <span className="text-indigo-300">IPv{ipInfo.version}</span>
->>>>>>> parent of fbd9ef0 (Update Card.jsx)
-=======
-            <span className="text-indigo-300">IPv{ipInfo.version}</span>
->>>>>>> parent of fbd9ef0 (Update Card.jsx)
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Country:</span>
