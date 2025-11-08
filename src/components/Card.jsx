@@ -30,12 +30,16 @@ function Card({ title, ipInfo }) {
         </div>
         <div className="grid gap-3">
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
-            <span className="text-gray-300 font-medium">IP Address:</span>
-            <span className="text-purple-300 font-mono">{ipInfo.ip}</span>
+            <span className="text-gray-300 font-medium">Input:</span>
+            <span className="text-purple-300 font-mono">{ipInfo.input}</span>
+          </div>
+          <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
+            <span className="text-gray-300 font-medium">Resolved IP:</span>
+            <span className="text-purple-300 font-mono">{ipInfo.resolved_ip}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Version:</span>
-            <span className="text-indigo-300">IPv{ipInfo.version}</span>
+            <span className="text-indigo-300">{ipInfo.version}</span>
           </div>
           <div className="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg border border-gray-600/30">
             <span className="text-gray-300 font-medium">Country:</span>

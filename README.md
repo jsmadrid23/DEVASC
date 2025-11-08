@@ -6,7 +6,7 @@
 
 <br/>
 
-![UI Screenshot](./images/Screenshot%20Repo%202.png)
+![UI Screenshot](./images/ScreenshotUI.png)
 
 <br/>
 
@@ -175,24 +175,9 @@ DEVASC/
 ---
 
 ## 🔮 Possible Future Enhancements
-- Bulk IP CSV upload + batch enrichment
-- Caching layer (Redis) to reduce upstream calls
-- Rate limiting & API key auth
 - Export results (JSON / CSV)
-- Dark/light theme toggle
 - Reverse DNS + WHOIS summary
 - ASN prefix / allocation stats
-- Map clustering for multiple lookups
-
----
-
-## 🧾 License
-MIT License. See LICENSE (add one if missing) for details.
-
----
-
-## 🤝 Contributing
-PRs welcome! For larger changes, open an issue to discuss direction first.
 
 ---
 
