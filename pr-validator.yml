@@ -1,0 +1,59 @@
+# File: .github/workflows/pr-check.yml
+name: CI Compliance Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unified-check:
+    name: Lint, Test, and Build (Frontend + Backend)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- FRONTEND SETUP ---
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        run: |
+          cd src
+          npm install
+
+      - name: Lint frontend code
+        run: |
+          cd src
+          npm run lint
+
+      - name: Build frontend
+        run: |
+          cd src
+          npm run build
+
+      # --- BACKEND SETUP ---
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint backend code
+        run: |
+          cd backend
+          flake8 .
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          pytest
